@@ -22,10 +22,12 @@ namespace ReactAccurateCalculator.Features
 
             public async Task<CalculateResponse> Handle(CalculateQuery request, CancellationToken cancellationToken)
             {
+                var calculatedEquation = await calculator.Calculate(request.Equation);
                 return new CalculateResponse
                 {
                     Equation = request.Equation,
-                    Result = await calculator.Calculate(request.Equation)
+                    Result = calculatedEquation,
+                    ResultAsString = calculatedEquation.ToString()
                 };
             }
         }

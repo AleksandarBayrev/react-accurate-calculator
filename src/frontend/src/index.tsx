@@ -7,9 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import { IApplicationConfiguration, ILogger, UpdatedWindow } from './types';
 import { Configuration } from './constants/Configuration';
 import { Logger } from './utils/Logger';
+import { MathWebApi } from './services/MathWebApi';
 
 const updatedWindow: UpdatedWindow = window as any as UpdatedWindow;
 const logger: ILogger = new Logger("ReactAccurateCalculator");
+const mathApiLogger: ILogger = new Logger("MathWebApi");
 
 updatedWindow.RenderCalculator = (divId: string, configuration: IApplicationConfiguration | undefined) => {
   const finalAppConfiguration: IApplicationConfiguration = _.merge({}, Configuration, configuration);
@@ -20,7 +22,7 @@ updatedWindow.RenderCalculator = (divId: string, configuration: IApplicationConf
   );
   root.render(
     <React.StrictMode>
-      <App configuration={finalAppConfiguration} />
+      <App configuration={finalAppConfiguration} mathWebApi={new MathWebApi(finalAppConfiguration.apiUrl, mathApiLogger)} logger={logger} />
     </React.StrictMode>
   );
 }

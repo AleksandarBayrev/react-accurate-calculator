@@ -38,6 +38,12 @@ namespace ReactAccurateCalculator
 
             app.UseAuthorization();
 
+            app.UseCors(configuration =>
+            {
+                configuration.AllowAnyHeader();
+                configuration.AllowAnyMethod();
+                configuration.AllowAnyOrigin();
+            });
 
             app.MapControllers();
 

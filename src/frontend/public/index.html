@@ -26,12 +26,14 @@
     -->
     <title>React App</title>
     <script>
-      window.buttonHandler = (div) => {
+      window.buttonHandler = (div, configuration) => {
         if (!window.RenderCalculator) {
           return alert('react-accurate-calculator Javascript not loaded! Check network tab.');
         }
-        const configuration = {
-          apiUrl: "https://localhost:3000"
+        if (!configuration) {
+          configuration = {
+            apiUrl: 'https://localhost:7260'
+          }
         }
         RenderCalculator(div, configuration);
         window.document.getElementById('message').remove();
@@ -42,7 +44,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="message">Click on the button to load component</div>
-    <button id="render-component-button" onclick="buttonHandler('root')">Render Calculator</button>
+    <button id="render-component-button" onclick="buttonHandler('root', window.configuration)">Render Calculator</button>
     <div id="root"></div>
     <!--
       This HTML file is a template.

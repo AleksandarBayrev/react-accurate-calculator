@@ -10,5 +10,6 @@ namespace ReactAccurateCalculator.Models
     {
         public string Equation { get; init; }
         public decimal Result { get; init; }
+        public string ResultAsString { get; init; }
     }
 }
