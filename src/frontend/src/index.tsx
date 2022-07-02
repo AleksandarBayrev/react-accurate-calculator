@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
+import { IApplicationConfiguration, UpdatedWindow } from './types';
+import { Configuration } from './Configuration';
 
-window.RenderCalculator = (divId: string) => {
+const updatedWindow: UpdatedWindow = window as any as UpdatedWindow;
+
+updatedWindow.RenderCalculator = (divId: string, configuration: IApplicationConfiguration) => {
   const root = ReactDOM.createRoot(
     document.getElementById(divId) as HTMLElement
   );
   root.render(
     <React.StrictMode>
-      <App />
+      <App configuration={{...configuration, ...Configuration}} />
     </React.StrictMode>
   );
 }
