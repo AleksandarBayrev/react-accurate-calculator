@@ -1,20 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { App } from './App';
+import { App } from './components/App';
+import _ from 'lodash';
 import reportWebVitals from './reportWebVitals';
-import { IApplicationConfiguration, UpdatedWindow } from './types';
-import { Configuration } from './Configuration';
+import { IApplicationConfiguration, ILogger, UpdatedWindow } from './types';
+import { Configuration } from './constants/Configuration';
+import { Logger } from './utils/Logger';
 
 const updatedWindow: UpdatedWindow = window as any as UpdatedWindow;
+const logger: ILogger = new Logger("ReactAccurateCalculator");
 
-updatedWindow.RenderCalculator = (divId: string, configuration: IApplicationConfiguration) => {
+updatedWindow.RenderCalculator = (divId: string, configuration: IApplicationConfiguration | undefined) => {
+  const finalAppConfiguration: IApplicationConfiguration = _.merge({}, Configuration, configuration);
+  logger.Log(`Rendering ReactAccurateCalculator to div ${divId}`);
+  logger.Log(`App configuration: ${JSON.stringify(finalAppConfiguration)}`);
   const root = ReactDOM.createRoot(
     document.getElementById(divId) as HTMLElement
   );
   root.render(
     <React.StrictMode>
-      <App configuration={{...configuration, ...Configuration}} />
+      <App configuration={finalAppConfiguration} />
     </React.StrictMode>
   );
 }

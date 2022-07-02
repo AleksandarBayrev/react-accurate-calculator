@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import { IApplicationConfiguration } from './types';
+import '../../styles/App.css';
+import { IApplicationConfiguration } from '../../types';
 
 export type AppProps = {
   configuration: IApplicationConfiguration

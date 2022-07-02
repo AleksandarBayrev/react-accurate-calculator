@@ -1,6 +1,6 @@
 import renderer from 'react-test-renderer';
-import { App } from './App';
-import { Configuration } from './Configuration';
+import { App } from '../components/App';
+import { Configuration } from '../constants/Configuration';
 
 describe('App UI Tests', () => {
   test('app snapshot', () => {

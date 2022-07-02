@@ -30,7 +30,10 @@
         if (!window.RenderCalculator) {
           return alert('react-accurate-calculator Javascript not loaded! Check network tab.');
         }
-        RenderCalculator(div);
+        const configuration = {
+          apiUrl: "https://localhost:3000"
+        }
+        RenderCalculator(div, configuration);
         window.document.getElementById('message').remove();
         window.document.getElementById('render-component-button').remove();
       };
