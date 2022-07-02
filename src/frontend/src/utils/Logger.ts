@@ -8,6 +8,6 @@ export class Logger implements ILogger {
     }
 
     public Log(message: string) {
-        console.log(`Logger_${this.loggingContext} [${new Date().toISOString()}]: ${message}`);
+        console.log(`[${new Date().toISOString()}] Logger_${this.loggingContext}: ${message}`);
     }
 }
