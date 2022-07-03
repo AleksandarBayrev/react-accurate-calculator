@@ -19,7 +19,8 @@ namespace ReactAccurateCalculator
                 
                 return new ApplicationConfiguration
                 {
-                    FilePath = builder.Configuration["FilePath"]
+                    FilePath = builder.Configuration.GetValue<string>("FilePath"),
+                    RequireHTTPS = builder.Configuration.GetValue<bool>("RequireHTTPS")
                 };
             });
             builder.Services.AddMediatR(typeof(CalculateFeature));
@@ -29,13 +30,18 @@ namespace ReactAccurateCalculator
 
             var app = builder.Build();
 
+            var appConfig = app.Services.GetService<IApplicationConfiguration>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            if (appConfig.RequireHTTPS)
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseAuthorization();
 
