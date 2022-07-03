@@ -12,5 +12,5 @@ const requestOptions = {
 setInterval(() =>
     fetch("http://localhost:5260/calculate", requestOptions)
     .then(x => x.json())
-    .then(x => console.log(x)),
+    .then(x => console.log(`${new Date().toISOString()}: `, x)),
 100);
