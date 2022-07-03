@@ -47,7 +47,7 @@ namespace ReactAccurateCalculator
             });
 
             app.MapControllers();
-
+            app.Services.GetService<Interfaces.ILogger>().Log(nameof(ReactAccurateCalculator), $"Started {nameof(ReactAccurateCalculator)}");
             app.Run();
         }
     }
