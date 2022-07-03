@@ -1,33 +1,36 @@
 ﻿using ReactAccurateCalculator.Interfaces;
-using ReactAccurateCalculator.Models;
+using AngouriMath;
+using AngouriMath.Extensions;
 
 namespace ReactAccurateCalculator.Services
 {
     public class Calculator : ICalculator
     {
-        private readonly IList<decimal> numbers;
-        private readonly IList<MathOperation> mathOperations;
+        private readonly ILogger logger;
 
-        public Calculator()
+        public Calculator(ILogger logger)
         {
-            this.numbers = new List<decimal>();
-            this.mathOperations = new List<MathOperation>();
+            this.logger = logger;
         }
 
-        private async Task ClearCollections()
+        public async Task<string> Calculate(string equation)
         {
-            await Task.WhenAll(
-                Task.Run(() => this.numbers.Clear()),
-                Task.Run(() => this.mathOperations.Clear())
-            );
+            await logger.Log(nameof(Calculator), $"Calculating equation {equation}");
+            Entity.Number.Complex result = await EvalNumericalAsync(equation);
+            var parsedResult = await ParseToDecimalAsync(result);
+            var asString = parsedResult.ToString();
+            await logger.Log(nameof(Calculator), $"Finished calculating equation {equation}, result = {asString}");
+            return asString;
         }
 
-        public async Task<decimal> Calculate(string equation)
+        private Task<Entity.Number.Complex> EvalNumericalAsync(string equation)
         {
-            decimal result = 0;
-            equation.Split().ToList();
-            await ClearCollections();
-            return result;
+            return Task.FromResult(equation.EvalNumerical());
+        }
+
+        private Task<decimal> ParseToDecimalAsync(Entity.Number.Complex complexNumber)
+        {
+            return Task.FromResult(((decimal)complexNumber));
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ICalculator
     {
-        public Task<decimal> Calculate(string equation);
+        public Task<string> Calculate(string equation);
     }
 }

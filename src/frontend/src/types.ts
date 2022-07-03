@@ -11,7 +11,6 @@ export enum LogLevel {
 
 export type MathWebApiCalculateResponse = {
     expression: string;
-    result: number;
     resultAsString: string;
 }
 

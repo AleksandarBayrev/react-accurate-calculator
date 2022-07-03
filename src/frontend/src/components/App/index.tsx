@@ -48,7 +48,6 @@ export class App extends React.Component<AppProps, AppState> {
     try {
       const result = await this.mathWebApi.calculate(this.state.equation);
       this.setState({
-        equation: '',
         result: result.resultAsString
       });
     } catch (err) {
@@ -65,11 +64,23 @@ export class App extends React.Component<AppProps, AppState> {
       setTimeout(() => {
         this.setState({
           error: '',
-          result: ''
+          result: '',
+          equation: ''
         });
         res(this.state);
       });
     });
+  }
+
+  private renderResult() {
+    const shouldRenderResult = this.state.equation.length && this.state.result.length;
+    return (
+      shouldRenderResult ?
+      <div id="calculation-result">
+        {this.state.equation}={this.state.result}
+      </div>
+      : <></>
+    )
   }
 
   render() {
@@ -89,7 +100,7 @@ export class App extends React.Component<AppProps, AppState> {
             <button onClick={this.clearState}>Clear</button>
           </p>
           <p>
-            {this.state.error.length ? this.state.error : this.state.result}
+            {this.state.error.length ? this.state.error : this.renderResult()}
           </p>
         </header>
       </div>

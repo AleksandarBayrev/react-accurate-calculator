@@ -26,8 +26,7 @@ namespace ReactAccurateCalculator.Features
                 return new CalculateResponse
                 {
                     Equation = request.Equation,
-                    Result = calculatedEquation,
-                    ResultAsString = calculatedEquation.ToString()
+                    ResultAsString = calculatedEquation
                 };
             }
         }

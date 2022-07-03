@@ -23,6 +23,7 @@ namespace ReactAccurateCalculator
                 };
             });
             builder.Services.AddMediatR(typeof(CalculateFeature));
+            builder.Services.AddSingleton<Interfaces.ILogger, Logger>();
             builder.Services.AddSingleton<ICalculator, Calculator>();
             builder.Services.AddSingleton<IFileStorage, FileStorage>();
 
