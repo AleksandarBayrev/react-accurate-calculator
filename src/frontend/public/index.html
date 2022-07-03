@@ -37,14 +37,20 @@
         }
         RenderCalculator(div, configuration);
         window.document.getElementById('message').remove();
-        window.document.getElementById('render-component-button').remove();
+        window.document.getElementById('render-component-button-container').remove();
+        window.document.getElementById('json-configuration-container').remove();
       };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="message">Click on the button to load component</div>
-    <button id="render-component-button" onclick="buttonHandler('root', window.configuration)">Render Calculator</button>
+    <div id="json-configuration-container">
+      <textarea id="json-configuration">{"apiUrl": "https://localhost:7260"}</textarea>
+    </div>
+    <div id="render-component-button-container">
+      <button id="render-component-button" onclick="buttonHandler('root', JSON.parse(document.getElementById('json-configuration').value))">Render Calculator</button>
+    </div>
     <div id="root"></div>
     <!--
       This HTML file is a template.
